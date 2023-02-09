@@ -1,0 +1,30 @@
+class Solution:
+    def findOriginalArray(self, changed: List[int]) -> List[int]:
+        original = []
+        dict1 = {}
+        even, odd, tot = 0, 0, 0
+        for num in changed:
+            if num in dict1:
+                dict1[num] += 1
+            else:
+                dict1[num] = 1
+            if num % 2 == 0:
+                even += 1
+            else:
+                odd += 1
+            tot += num
+        if odd > even or tot % 3 != 0 or (even + odd) % 2 != 0:
+            return []
+            
+        changed.sort()
+        for num in changed:
+            if dict1[num] < 0:
+                return []
+            if dict1[num] > 0:
+                original.append(num)
+                dict1[num] -= 1
+                if num * 2 not in dict1:
+                    return []
+                dict1[2 * num] -= 1
+        return original
+                
