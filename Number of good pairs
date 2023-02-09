@@ -1,0 +1,18 @@
+class Solution:
+    def numIdenticalPairs(self, nums: List[int]) -> int:
+        def choose_2(x):
+            return x * (x-1)/2
+        
+        dict1 = {}
+        for i in nums:
+            if i in dict1:
+                dict1[i] += 1
+            else:
+                dict1[i] = 1
+        
+        ans = 0
+        print(dict1)
+        for val in dict1.values():
+            if val > 0:
+                ans += choose_2(val)
+        return int(ans)
