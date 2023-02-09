@@ -1,0 +1,20 @@
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        st = [str(x) for x in nums]
+        ln = -1
+        for elem in st:
+            ln = max(ln, len(elem))
+        st2 = [[a, (a*ln)[:ln]] for a in st]
+
+        st2.sort(key = lambda x: x[1], reverse = True)
+        for i in range(len(st2) - 1):
+            n, m = st2[i], st2[i+1]
+            if n[1] == m[1]:
+                print("over here")
+                if n[0] + m[0] < m[0] + n[0]:
+                    st2[i], st2[i+1] = st2[i+1], st2[i] 
+        print(st2)
+        st3 = [a[0] for a in st2]
+        print(st3)
+
+        return str(int(''.join(st3)))
