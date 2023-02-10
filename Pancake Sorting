@@ -1,0 +1,19 @@
+class Solution:
+    def pancakeSort(self, arr: List[int]) -> List[int]:
+        def flip(lst, i):
+            rev = lst[:i][::-1]
+            rev.extend(lst[i:])
+            return rev
+        upto = []
+        for i in range(len(arr)-1, -1, -1):
+            m = arr.index(max(arr[:i+1]))
+            if m > 0:
+                upto.append(m+1)
+                arr = flip(arr, m+1)
+                m = 0
+            if m == 0:
+                upto.append(i+1)
+                arr = flip(arr, i+1)
+
+        return upto
+
