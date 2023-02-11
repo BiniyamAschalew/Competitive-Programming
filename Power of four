@@ -1,0 +1,10 @@
+class Solution:
+    def isPowerOfFour(self, n: int) -> bool:
+        def ipf(n):
+            if n <= 0:
+                return False
+            if n == 1:
+                return True
+            else:
+                return n % 4 == 0 and ipf(n/4)
+        return ipf(n)
