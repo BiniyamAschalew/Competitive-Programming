@@ -1,0 +1,19 @@
+class Solution:
+    def reverseParentheses(self, s: str) -> str:
+        # new open bracket or new closed bracket means change your reversing pattern
+        separated = ['']
+        for character in s:
+            if character == '(':
+                separated.append('')
+            elif character == ')':
+                separated[-2] += separated[-1][::-1]
+                separated.pop()
+            else:
+                separated[-1] += character
+        whole = ''.join(separated)
+        print(whole)
+        return whole
+
+                
+
+
