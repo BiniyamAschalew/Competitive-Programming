@@ -1,0 +1,31 @@
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        def compute(n1, n2, sign):
+            if sign == '+':
+                return n1 + n2
+            if sign == '*':
+                return n1 * n2
+            if sign == '-':
+                return n1 - n2
+            if sign == '/':
+                return int(n1 / n2)
+        stck = []
+        oprt = set("* + - /".split())
+        for i in tokens:
+            if not i in oprt:
+                stck.append(int(i))
+            else:
+                n2 = stck.pop()
+                n1 = stck.pop()
+                r = compute(n1, n2, i)
+                stck.append(r)
+        return stck[0]
+
+
+
+
+        # tokens = ["4","13","5","/","+"]
+        # i = 4, stack = [] f(tokens, 4, [])
+        # toknes[i] = '*'  stack['*']    f(tokens, 3, [*])
+        # tokens[3] = '3'   n1 = 3 sign = '*' n2 = f(tokens, 2, [])
+
