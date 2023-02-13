@@ -1,0 +1,26 @@
+class Solution:
+    def totalFruit(self, fruits: List[int]) -> int:
+        counts = [0] * len(fruits)
+        max_count = 0
+        curr_max = 0
+        type_count = 0
+        start = 0
+        
+        for i in range(len(fruits)):
+            if counts[fruits[i]] == 0:
+                type_count += 1
+            counts[fruits[i]] += 1
+            curr_max += 1
+            
+            while type_count > 2 and start < i:
+                counts[fruits[start]] -= 1
+                if counts[fruits[start]] == 0:
+                    type_count -= 1
+                start += 1
+                curr_max -= 1
+            
+            max_count = max(max_count, curr_max)
+        
+        return max_count
+
+
