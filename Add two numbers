@@ -1,0 +1,22 @@
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+
+        result_head = ListNode()
+        current = result_head
+        list1, list2 = l1, l2
+
+        carry_over = 0
+        while list1 or list2 or carry_over:
+            first_val = list1.val if list1 else 0
+            second_val = list2.val if list2 else 0
+            
+            sum_val = first_val + second_val + carry_over
+            carry_over = sum_val // 10
+            sum_val = sum_val % 10
+            current.next = ListNode(sum_val)
+            
+            current = current.next
+            list1 = list1.next if list1 else None
+            list2 = list2.next if list2 else None
+
+        return result_head.next
