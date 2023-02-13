@@ -1,0 +1,5 @@
+class Solution:
+ def productExceptSelf(self, nums):
+        a1 = list(accumulate(nums, mul))
+        a2 = list(accumulate(nums[::-1], mul))[::-1]
+        return [(a1[i-1] if i else 1) * (a2[i+1] if i+1 < len(nums) else 1) for i in range(len(nums))]
