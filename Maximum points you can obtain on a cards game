@@ -1,0 +1,14 @@
+class Solution:
+    def maxScore(self, nums: List[int], k: int) -> int:
+        # k is the window size
+        
+        n = len(nums)
+        max_sum = sum(nums[n-k:n])
+        ans = max_sum
+        print(max_sum)
+        for i in range(k):
+            max_sum += nums[i]
+            max_sum -= nums[-k+i]
+            ans = max(max_sum, ans)
+        return ans
+# [1,2,3,4,5,6,1] k = 3
