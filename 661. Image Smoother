@@ -1,0 +1,38 @@
+class Solution:
+    def imageSmoother(self, img: List[List[int]]) -> List[List[int]]:
+        def find_avrg(list1):
+            return sum(list1)/len(list1)
+
+        new_img = []
+        for row in img:
+            new_row = row[:]
+            new_img.append(new_row)
+            
+        for i in range(len(img)):
+            for j in range(len(img[0])):
+
+                indices = []
+                values = []
+                delta = [-1, 0, 1]
+
+                for i_d in delta:
+                    for j_d in delta:
+
+                        new_i = i + i_d
+                        new_j = j + j_d
+
+                        if 0 <= new_i < len(img) and 0 <= new_j < len(img[0]):
+
+                            indices.append([new_i, new_j])
+                            values.append(img[new_i][new_j])
+
+                # updating the image
+                
+                new_val = find_avrg(values)
+                print(f"values is {values} and val is {new_val}")
+                new_img[i][j] = int(new_val)
+
+
+        return new_img
+
+
