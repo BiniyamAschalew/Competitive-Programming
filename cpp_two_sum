@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        
+        vector<int> output = {-1, -1};
+        unordered_map<int, int> index_map;
+        for (int i = 0; i < nums.size(); i++){
+
+            // save the target - num for the current index with the index
+            if (index_map.find(nums[i]) != index_map.end()){  // index_map.end()
+
+                output[0] = index_map[nums[i]];
+                output[1] = i;
+
+            } 
+
+            index_map[target - nums[i]] = i; //save target - cur_num in the dictionary with value cur_idx
+        }
+        
+        return output;
+
+    }
+};
